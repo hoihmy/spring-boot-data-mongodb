@@ -6,7 +6,7 @@ import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
 
@@ -21,7 +21,7 @@ public class AppConfig {
         return CloudWatchAsyncClient
                 .builder()
                 .region(Region.US_EAST_2)
-                .credentialsProvider(DefaultCredentialsProvider.create())
+                .credentialsProvider(ProfileCredentialsProvider.create("hoihmyit"))
                 .build();
     }
 
