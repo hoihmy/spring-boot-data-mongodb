@@ -21,7 +21,7 @@ public class AppConfig {
         return CloudWatchAsyncClient
                 .builder()
                 .region(Region.US_EAST_2)
-                .credentialsProvider(ProfileCredentialsProvider.create("hoihmyit"))
+                .credentialsProvider(ProfileCredentialsProvider.create())
                 .build();
     }
 
