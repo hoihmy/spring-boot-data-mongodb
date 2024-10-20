@@ -6,6 +6,7 @@ import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
@@ -18,10 +19,16 @@ public class AppConfig {
 
     @Bean
     public CloudWatchAsyncClient cloudWatchAsyncClient() {
+        ProfileCredentialsProvider provider = ProfileCredentialsProvider.create("hoihmyit");
+
+        // Log the credentials to see if they are fetched correctly
+        AwsCredentials credentials = provider.resolveCredentials();
+        System.out.println("Access Key: " + credentials.accessKeyId());
+
         return CloudWatchAsyncClient
                 .builder()
                 .region(Region.US_EAST_2)
-                .credentialsProvider(ProfileCredentialsProvider.create("hoihmyit"))
+                .credentialsProvider(provider)
                 .build();
     }
 
